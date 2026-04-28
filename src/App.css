@@ -1,3 +1,107 @@
+/* HEADER */
+.header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__nav {
+  display: flex;
+  gap: 15px;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid var(--input-border);
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 5px;
+}
+
+/* SEARCH */
+.search-bar {
+  padding: 20px;
+  text-align: center;
+}
+
+.search-bar__input {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-bar select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+/* GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card__body {
+  padding: 10px;
+}
+
+.card__name {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* FAV BUTTON */
+.fav-btn {
+  margin-top: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.fav-btn--saved {
+  color: red;
+}
+
+/* COUNTRY PAGE */
 .country-page {
   max-width: 1000px;
   margin: auto;
@@ -8,6 +112,9 @@
   padding: 8px 16px;
   margin-bottom: 20px;
   cursor: pointer;
+  background: var(--card-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
 }
 
 .country-page__layout {
@@ -39,16 +146,33 @@
 
 .border-badge {
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   padding: 5px 10px;
   margin: 5px;
   border-radius: 5px;
 }
 
+/* STATUS */
 .page-status {
   padding: 20px;
 }
 
 .page-status--error {
   color: red;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .country-page__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .country-page__details {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
