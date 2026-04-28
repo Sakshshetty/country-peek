@@ -1,10 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import ReactDOM from "react-dom/client";   // ✅ THIS LINE IS REQUIRED
+import App from "./App";
+import { ThemeProvider } from "./context/ThemeContext";
+import { FavouritesProvider } from "./context/FavouritesContext";
 import "./styles/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ThemeProvider>
+    <FavouritesProvider>
+      <App />
+    </FavouritesProvider>
+  </ThemeProvider>
 );

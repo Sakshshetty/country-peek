@@ -1,36 +1,38 @@
-import { Link } from 'react-router-dom'
+import { useFavourites } from "../context/FavouritesContext";
 
 function CountryCard({ country }) {
-  const { name, flags, population, region, capital, cca3 } = country
+  const { favourites, dispatch } = useFavourites();
+
+  const isSaved = favourites.some((f) => f.cca3 === country.cca3);
+
+  function handleFav(e) {
+    e.stopPropagation();
+
+    if (isSaved) {
+      dispatch({ type: "REMOVE_FAVOURITE", payload: country.cca3 });
+    } else {
+      dispatch({ type: "ADD_FAVOURITE", payload: country });
+    }
+  }
 
   return (
-    <Link to={`/country/${cca3}`} className="card">
-      <img
-        src={flags.svg}
-        alt={`Flag of ${name.common}`}
-        className="card__flag"
-      />
+    <div className="card">
+      <img src={country.flags.svg} alt={country.name.common} />
 
       <div className="card__body">
-        <h3 className="card__name">{name.common}</h3>
+        <h3>{country.name.common}</h3>
+        <p>Population: {country.population.toLocaleString()}</p>
+        <p>Region: {country.region}</p>
 
-        <p>
-          <span>Population: </span>
-          {population.toLocaleString()}
-        </p>
-
-        <p>
-          <span>Region: </span>
-          {region}
-        </p>
-
-        <p>
-          <span>Capital: </span>
-          {capital?.[0] ?? 'N/A'}
-        </p>
+        <button
+          className={`fav-btn ${isSaved ? "fav-btn--saved" : ""}`}
+          onClick={handleFav}
+        >
+          {isSaved ? "♥ Saved" : "♡ Save"}
+        </button>
       </div>
-    </Link>
-  )
+    </div>
+  );
 }
 
-export default CountryCard
+export default CountryCard;
