@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";   // ✅ THIS LINE IS REQUIRED
+import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 import { FavouritesProvider } from "./context/FavouritesContext";

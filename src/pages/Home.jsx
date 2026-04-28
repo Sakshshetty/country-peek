@@ -1,36 +1,35 @@
 import { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
-import CountryCard from "../components/CountryCard";
 import FilterBar from "../components/FilterBar";
+import CountryCard from "../components/CountryCard";
 
 function Home() {
   const [query, setQuery] = useState("");
   const [countries, setCountries] = useState([]);
-
   const [region, setRegion] = useState("All");
   const [sortBy, setSortBy] = useState("");
 
+  const trimmedQuery = query.trim();
+
   useEffect(() => {
-    if (!query) {
+    if (!trimmedQuery) {
       setCountries([]);
       return;
     }
 
-    fetch(`https://restcountries.com/v3.1/name/${query}`)
+    fetch(`https://restcountries.com/v3.1/name/${trimmedQuery}`)
       .then((res) => res.json())
       .then((data) => setCountries(data))
       .catch(() => setCountries([]));
-  }, [query]);
+  }, [trimmedQuery]);
 
   const displayed = [...countries]
     .filter((c) => region === "All" || c.region === region)
     .sort((a, b) => {
-      if (sortBy === "name") {
+      if (sortBy === "name")
         return a.name.common.localeCompare(b.name.common);
-      }
-      if (sortBy === "population") {
+      if (sortBy === "population")
         return b.population - a.population;
-      }
       return 0;
     });
 
@@ -45,12 +44,12 @@ function Home() {
         onSortChange={setSortBy}
       />
 
-      {countries.length === 0 ? (
-        <p>Start searching to explore countries.</p>
+      {displayed.length === 0 ? (
+        <p className="home__placeholder">No countries found</p>
       ) : (
         <div className="cards-grid">
-          {displayed.map((country) => (
-            <CountryCard key={country.cca3} country={country} />
+          {displayed.map((c) => (
+            <CountryCard key={c.cca3} country={c} />
           ))}
         </div>
       )}

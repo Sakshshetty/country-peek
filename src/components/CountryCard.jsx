@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useFavourites } from "../context/FavouritesContext";
 
 function CountryCard({ country }) {
@@ -16,22 +17,28 @@ function CountryCard({ country }) {
   }
 
   return (
-    <div className="card">
-      <img src={country.flags.svg} alt={country.name.common} />
+    <Link to={`/country/${country.cca3}`} className="card">
+      <img src={country.flags.svg} alt={`Flag of ${country.name.common}`} />
 
       <div className="card__body">
-        <h3>{country.name.common}</h3>
+        <h3 className="card__name">{country.name.common}</h3>
         <p>Population: {country.population.toLocaleString()}</p>
         <p>Region: {country.region}</p>
 
         <button
           className={`fav-btn ${isSaved ? "fav-btn--saved" : ""}`}
+          aria-label={
+            isSaved
+              ? `Remove ${country.name.common} from favourites`
+              : `Save ${country.name.common} to favourites`
+          }
+          aria-pressed={isSaved}
           onClick={handleFav}
         >
           {isSaved ? "♥ Saved" : "♡ Save"}
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
 
