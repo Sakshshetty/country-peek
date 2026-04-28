@@ -8,6 +8,10 @@
   padding: 8px 16px;
   margin-bottom: 20px;
   cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
 }
 
 .country-page__layout {
@@ -28,7 +32,8 @@
 }
 
 .country-page__official {
-  color: gray;
+  color: var(--text);
+  opacity: 0.7;
 }
 
 .country-page__details {
@@ -39,14 +44,17 @@
 
 .border-badge {
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   padding: 5px 10px;
   margin: 5px;
   border-radius: 5px;
+  background: var(--card-bg);
+  color: var(--text);
 }
 
 .page-status {
   padding: 20px;
+  color: var(--text);
 }
 
 .page-status--error {
